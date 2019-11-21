@@ -56,7 +56,25 @@ TEST_CASE("#define increment twice", "[Item 2.1]") {
     // ((++a) > (b) is true, so (++a)
 }
 
+// A solution
 
+template<typename T>
+inline T isGreater(const T& a, const T& b)
+{
+    return (a > b ? a : b);
+}
+
+TEST_CASE("inline increment once", "[Item 2.3]") {
+    int a=5,b=0;
+    (void)isGreater(++a,b+10);
+    REQUIRE(a == 6); // Lovely, as you might expect, ++a == 6
+}
+
+TEST_CASE("inline still increment once", "[Item 2.4]") {
+    int a=5,b=0;
+    (void)isGreater(++a,b);
+    REQUIRE(a == 6); // Lovely, as you might expect, ++a == 6
+}
 
 /***************************************************************************************************/
 /*
