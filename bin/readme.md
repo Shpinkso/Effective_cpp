@@ -1,0 +1,1 @@
+Output directory for builds, required by Travis
