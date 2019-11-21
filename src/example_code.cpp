@@ -42,6 +42,13 @@ class ConstComp{
 #define IS_GREATER(a,b) ((a) > (b) ? (a) : (b))
 
 // the irony is that these test cases are clearly pre-procesor macros =D
+TEST_CASE("#define increment once", "[Item 2.2]") {
+    int a=5,b=0;
+    IS_GREATER(++a,b+10);
+    REQUIRE(a == 6); // Lovely, as you might expect, ++a == 6
+    // ((++a) > (b+10) is false so (b)
+}
+
 TEST_CASE("#define increment twice", "[Item 2.1]") {
     int a=5,b=0;
     IS_GREATER(++a,b);
@@ -49,12 +56,7 @@ TEST_CASE("#define increment twice", "[Item 2.1]") {
     // ((++a) > (b) is true, so (++a)
 }
 
-TEST_CASE("#define increment once", "[Item 2.2]") {
-    int a=5,b=0;
-    IS_GREATER(++a,b+10);
-    REQUIRE(a == 6); // Pass this time
-    // ((++a) > (b+10) is false so (b)
-}
+
 
 /***************************************************************************************************/
 /*
