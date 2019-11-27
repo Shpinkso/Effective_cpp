@@ -77,7 +77,7 @@ TEST_CASE("inline still increment once", "[Item 2.3]") {
 }
 
 /***************************************************************************************************/
-/* Item 3: Use const whenever possible
+/* Item 3: Use const whenever possible                                                             */
 /***************************************************************************************************/
 
 TEST_CASE("Const pointers and data", "[Item 3.0]") {
@@ -92,16 +92,22 @@ TEST_CASE("Const pointers and data", "[Item 3.0]") {
 
     const char * const t = greeting;// const pointer & const data
 
+    std::cout << q << p << r << s << t;
     REQUIRE(1==1);
 }
 
 class Rational{
+    public:
     int i;
 };
 
 Rational A,B,C;
 Rational operator*(const Rational& lhs, const Rational& rhs)
 {
+        if(lhs.i < rhs.i)
+        {
+            return (B);
+        }
         return (A); // whatever, not important for the demonstration
 }
 
