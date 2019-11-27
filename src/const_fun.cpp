@@ -16,3 +16,42 @@ TEST_CASE("A const mess", "[Const the data]") {
 }
 
 
+static unsigned int calls = 0;
+
+class TextBlock{
+    private:
+    std::string data;
+    public:
+    TextBlock():data("hello"){};
+    const char& operator[](std::size_t position) const
+    {
+        calls++;
+        if(position < data.size())
+        {
+            return data[position];
+        }
+        return data[0];
+    }
+    // and now the non-const overload
+    char& operator[](std::size_t position)
+    {
+        calls++;
+        return const_cast<char&>(
+            static_cast<const TextBlock&>(*this)[position]
+        );
+    }
+
+};
+
+TEST_CASE("Overloading array dereference", "[Const the data]") {
+    TextBlock T;
+    TextBlock const ST;
+    char c;
+    REQUIRE(calls == 0);
+    c = T[1];
+    REQUIRE(calls == 2);
+    calls = 0;
+    c = ST[1];
+    REQUIRE(calls == 1);
+    REQUIRE(c == 'e');
+}
